@@ -4,8 +4,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const io = require("socket.io")();
 require("./socket")(io);
-
 const indexRouter = require("./routes/index");
+const postRouter = require("./routes/post");
+const userRouter = require("./routes/user");
 
 const app = express();
 
@@ -30,5 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/user", userRouter);
+app.use("/post", postRouter);
 
 module.exports = { app, io };
