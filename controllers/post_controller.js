@@ -16,7 +16,8 @@ exports.get_home_posts = async (req, res) => {
       .sort({ date: -1 })
       .skip(req.params.skip)
       .limit(1);
-    // where creator is in req.user.following
+    // where creator is in req.user.following || creator = req.user
+    // todo
     res.status(200).json(blog_data);
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -31,7 +32,7 @@ exports.get_wall_posts = async (req, res) => {
       .sort({ date: -1 })
       .skip(req.params.skip)
       .limit(1);
-    //where location == req.user
+    //where location == req.user todo
     res.status(200).json(blog_data);
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -39,7 +40,7 @@ exports.get_wall_posts = async (req, res) => {
 };
 
 exports.create_post = async (req, res) => {
-  //needs validation
+  //needs validation todo
   try {
     const post = new Post({
       creator: req.body.creator,
@@ -56,7 +57,7 @@ exports.create_post = async (req, res) => {
 };
 
 exports.update_post = async (req, res) => {
-  //needs validation
+  //needs validation todo
   try {
     const originalPost = await Post.findById(req.params.id);
     const updatedPost = new Post({

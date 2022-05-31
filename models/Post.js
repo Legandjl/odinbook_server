@@ -8,4 +8,5 @@ const PostSchema = new Schema({
   location: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
+//todo likes
 module.exports = mongoose.model("Post", PostSchema);

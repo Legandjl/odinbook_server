@@ -3,11 +3,8 @@ const passport = require("passport");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
-//login
 
-//reconfigure passport to use email instead of username for verification
 exports.login = async (req, res) => {
-  console.log("reached");
   //authenticate using local strategy (check if username/pwd is valid)
   passport.authenticate("local", { session: false }, (err, user, info) => {
     console.log("failed here");
@@ -18,14 +15,14 @@ exports.login = async (req, res) => {
         user: user,
       });
     }
-
-    //auth passed so login and generate token for return to client
+    //auth success
     const token = jwt.sign(user.toJSON(), process.env.SECRET_KEY, {
-      expiresIn: "10000s",
-    });
+      expiresIn: "1000000s",
+    }); // generate token and return to client
     return res.json({ user, token });
   })(req, res);
 };
+
 //signup
 exports.signup = async (req, res) => {
   try {
@@ -43,7 +40,10 @@ exports.signup = async (req, res) => {
       email: req.body.email,
     });
     await user.save();
-    res.status(200).json(user);
+    const token = jwt.sign(user.toJSON(), process.env.SECRET_KEY, {
+      expiresIn: "1000000s",
+    }); // generate token and return to client
+    return res.json({ user, token });
   } catch (e) {
     res.status(400).json({ error: e.message });
   }

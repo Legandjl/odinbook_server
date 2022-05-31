@@ -9,11 +9,10 @@ const ExtractJWT = passportJWT.ExtractJwt;
 //login strategy
 
 const verifier = async (email, password, done) => {
-  console.log("reached here v");
   try {
     const user = await User.findOne({ email: email });
     if (!user) {
-      //user not found, incorrect username entered
+      //user not found, incorrect email entered
       return done(null, false, { message: "Email not found" });
     }
     const passwordCheck = await bcrypt.compare(password, user.password);

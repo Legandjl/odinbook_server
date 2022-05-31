@@ -9,6 +9,7 @@ const userRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const app = express();
 const mongoose = require("mongoose");
+const passport = require("passport");
 require("dotenv").config();
 require("./passport/passport.js");
 require("./socket")(io);
@@ -30,7 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/user", userRouter);
-app.use("/post", postRouter);
+app.use("/post", passport.authenticate("jwt", { session: false }), postRouter);
 app.use("/auth", authRouter);
 
 module.exports = { app, io };
