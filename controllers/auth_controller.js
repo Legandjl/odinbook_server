@@ -7,7 +7,6 @@ require("dotenv").config();
 exports.login = async (req, res) => {
   //authenticate using local strategy (check if username/pwd is valid)
   passport.authenticate("local", { session: false }, (err, user, info) => {
-    console.log("failed here");
     if (err || !user) {
       //authentication failed so return 400 + error message
       return res.status(400).json({

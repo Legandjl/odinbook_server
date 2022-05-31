@@ -2,7 +2,7 @@ const Comment = require("../models/Comment");
 const Post = require("../models/Post");
 
 //get comments by post id
-exports.get_post_comments = async (req, res) => {
+exports.get_comments_by_post = async (req, res) => {
   try {
     const comments = await Comment.find()
       .where("post")

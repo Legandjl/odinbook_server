@@ -16,7 +16,7 @@ exports.get_home_posts = async (req, res) => {
       .sort({ date: -1 })
       .skip(req.params.skip)
       .limit(1);
-    // where creator is in req.user.following || creator = req.user
+    // where creator is in req.user.following || creator = req.user || creator = app creator (me)
     // todo
     res.status(200).json(blog_data);
   } catch (e) {
@@ -31,8 +31,10 @@ exports.get_wall_posts = async (req, res) => {
     const blog_data = await Post.find()
       .sort({ date: -1 })
       .skip(req.params.skip)
-      .limit(1);
-    //where location == req.user todo
+      .limit(5)
+      .where("location")
+      .equals(req.body.location);
+
     res.status(200).json(blog_data);
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -43,7 +45,7 @@ exports.create_post = async (req, res) => {
   //needs validation todo
   try {
     const post = new Post({
-      creator: req.body.creator,
+      creator: req.user,
       content: req.body.content,
       location: req.body.location,
     });

@@ -22,7 +22,7 @@ router.get("/all/:skip", post_controller.get_home_posts);
 router.get("/wall/:skip", post_controller.get_wall_posts);
 
 //get comments by post id
-router.get("/comments/:id", comment_controller.get_post_comments);
+router.get("/comments/:id", comment_controller.get_comments_by_post);
 
 //post comment to post by id
 router.post("/comment/:id", comment_controller.post_comment);

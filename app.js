@@ -3,7 +3,6 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const io = require("socket.io")();
-const indexRouter = require("./routes/index");
 const postRouter = require("./routes/post");
 const userRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
@@ -29,7 +28,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/post", passport.authenticate("jwt", { session: false }), postRouter);
 app.use("/auth", authRouter);
