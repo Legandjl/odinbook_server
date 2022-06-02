@@ -25,7 +25,6 @@ exports.get_home_posts = async (req, res) => {
 };
 
 //possibly combine into one
-
 exports.get_wall_posts = async (req, res) => {
   try {
     const blog_data = await Post.find()

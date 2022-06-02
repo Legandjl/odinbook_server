@@ -56,7 +56,6 @@ passport.use(
           return cb(null, false);
         }
       } catch (e) {
-        console.log("sent str8 here");
         return cb(e, false);
       }
     }
