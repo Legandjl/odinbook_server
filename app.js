@@ -9,6 +9,7 @@ const authRouter = require("./routes/auth");
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const cors = require("cors");
 require("dotenv").config();
 require("./passport/passport.js");
 require("./socket")(io);
@@ -27,8 +28,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
-app.use("/user", userRouter);
+app.use("/user", passport.authenticate("jwt", { session: false }), userRouter);
 app.use("/post", passport.authenticate("jwt", { session: false }), postRouter);
 app.use("/auth", authRouter);
 

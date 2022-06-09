@@ -33,8 +33,13 @@ const comments = [];
 // generate users
 
 async function userCreate(cb) {
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
+
   const userDetail = {
-    name: faker.name.findName(),
+    firstName: firstName,
+    lastName: lastName,
+    fullName: firstName + " " + lastName,
     email: faker.internet.email(),
     password: "password",
   };

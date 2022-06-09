@@ -3,6 +3,10 @@ const router = express.Router();
 const post_controller = require("../controllers/post_controller");
 const comment_controller = require("../controllers/comment_controller");
 
+router.get("/test", (req, res) => {
+  console.log(req.user);
+  return res.status(200).json(req.user);
+});
 // create new post
 router.post("/", post_controller.create_post);
 

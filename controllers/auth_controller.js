@@ -33,8 +33,11 @@ exports.signup = async (req, res) => {
       return res.status(422).json({ error: "email already in use" });
     }
     const hashPassword = await bcrypt.hash(req.body.password, 10);
+    const fullName = req.body.firstName + " " + req.body.lastName;
     const user = new User({
-      name: req.body.username,
+      fullName: fullName,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       password: hashPassword,
       email: req.body.email,
     });
