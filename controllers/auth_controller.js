@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const { faker } = require("@faker-js/faker");
 require("dotenv").config();
 
 exports.login = async (req, res) => {
@@ -40,6 +41,9 @@ exports.signup = async (req, res) => {
       lastName: req.body.lastName,
       password: hashPassword,
       email: req.body.email,
+      birthDate: faker.date.birthdate(),
+      gender: req.body.gender,
+      location: req.body.location,
     });
     await user.save();
     const token = jwt.sign(user.toJSON(), process.env.SECRET_KEY, {

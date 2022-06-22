@@ -5,7 +5,9 @@ const UserScehma = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   fullName: { type: String, required: true },
-
+  birthDate: { type: Date, required: true },
+  gender: { type: String, required: true },
+  location: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
@@ -18,9 +20,6 @@ const UserScehma = new Schema({
   },
 });
 
-UserScehma.pre("save", function (next) {
-  this.funnyTest = "test";
-  next();
-});
+//dob
 
 module.exports = mongoose.model("User", UserScehma);

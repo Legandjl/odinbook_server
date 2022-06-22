@@ -7,6 +7,5 @@ const PostSchema = new Schema({
   content: { type: String, required: true },
   location: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
-
-//todo likes
+//todo likes count
 module.exports = mongoose.model("Post", PostSchema);

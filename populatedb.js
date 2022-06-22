@@ -42,6 +42,9 @@ async function userCreate(cb) {
     fullName: firstName + " " + lastName,
     email: faker.internet.email(),
     password: "password",
+    birthDate: faker.date.birthdate(),
+    location: faker.address.city(),
+    gender: "Male",
   };
 
   const user = new User(userDetail);
